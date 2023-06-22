@@ -1,0 +1,192 @@
+//palindrome 
+
+let abc ="malayalam";
+let pal = abc.split('');
+pal.reverse();
+let ans2=pal.join('');
+if(abc == pal)
+   console.log(true)
+else
+   console.log(false);
+
+//array callback methods
+let obj2={
+    a:1,
+    b:2,
+    c:3
+}
+for(let key in obj2){
+    console.log(key,obj2[key]);
+}
+let obj3=[1,2,3,4,5]
+for(let key of obj3){  //for-of -> arrays
+    console.log(key);  //for-in -> objects
+}
+
+let sece_names=['vijay','ajith','surya','arya','madhavan'];
+let num_arr=[1,2,3,4,5];
+sece_names.forEach((ele) => { 
+     console.log(ele);// to print the names
+     console.log(ele*ele);//square values
+     console.log(ele.repeat(5));// repeat the values 5 times
+})
+
+// arrow function -- 0 arguments -(...)mandatory,1 arguments -(...)not mandatory,2 arguments -(...)mandatory,
+// one statement -{...} optional ,more than one statement-{...} mandatory.
+// single statement -';' -->in the end
+num_arr.forEach(ele => console.log(ele*ele)); //forEach()
+
+//map()
+let arr4= sece_names.map(ele =>ele.repeat(3));
+console.log(arr4);
+
+//filter()
+
+let ans_filter=num_arr.filter(ele => {
+    return!(ele%2); //even
+    return (ele%2); //odd
+})
+console.log(ans_filter);
+// return the array of names above the birth year 2002
+let names_obj=[
+{
+    name:"mahesan",
+    dob:2002
+},
+{
+    name:"ajay",
+    dob:2003
+},
+{
+    name:"bala",
+    dob:2004
+},
+{
+    name:"surya",
+    dob:2005
+}
+];
+let name_filter=names_obj.filter(ele => ele.dob >= 2003).map(ele=>ele.name);;
+      console.log(name_filter);
+//o/p[ ajay,bala,surya]
+
+//shallow copy-imp
+
+const array=[1,2,3,4,5];
+const array2=[...array]; //spread operator-copies elemets in arrayto array2 
+spread operator is also called as rest operator.rest operator must be used only in the last else output will contain error.
+array[4]=200;
+console.log(array2,array);
+
+//deep copy-imp
+const obj_cp={
+    name:"sece",
+    year:"2023"
+};
+const obj_cp2={...obj_cp};
+obj_cp2.year=2024;
+console.log(obj_cp,obj_cp2);
+
+const obj_cp3={
+    name:"sece",
+    year:"2023"
+    name:"sri eshwar" // name is used again in this...second occuring name will not be printed becoz it is overrided.
+};
+console.log(obj_cp3);
+
+//employee name age salary phone number
+// return array of objects who salary is>=25000 eith fields name and age only
+
+let emp= [{
+    name:'ashok',
+    age:30,
+    salary:20000
+},
+{
+    name:'siva',
+    age:28,
+    salary:30000
+},
+{
+    name:'simbu',
+    age:21,
+    salary:40000
+},
+{
+    name:'surya',
+    age:33,
+    salary:50000
+},
+{
+    name:'daniel',
+    age:40,
+    salary:22500
+}];
+let emp_filter=emp.filter(ele => ele.salary >= 25000).map(ele=> {
+    return {name: ele.name, age:ele.age};
+}); 
+      //console.log(emp_filter);
+
+
+//De-structuring
+
+//when an Already packed data is unpacked it is called as de-structuring. -->unpacking elements
+let arr_nums=[10,20,30,40,50]; // when adding extra 60 ,70 are out of bounds so they are not listed
+// rest operator rest of the elements will be stored in a single variable 
+let[a1,a2,a3,a4,...a5]=arr_nums;
+console.log(a1,a2,a3,a4,a5);
+ 
+let arr_number=[10,20,30,40,50,60,70,80,90,100];
+let[b1,b2, , b3,b4,...b5]=arr_number;
+console.log(b1,b2,b3,b4,b5);
+
+
+// destructuring object elements:
+let obj_1={
+    clg_name:"sece",
+    year:2024,
+    city:"cbe",
+    dept:"mech",
+    lpa:"50lpa",
+    color:"blue"
+};
+let {clg_name:college,year,city,color="green"}=obj_1 //: rename operator
+//while renaming original name will be deleted.
+console.log(college,year,city,color); 
+// default parameter-> for eg: color is assigned to blue in obj_1, when it is 
+//tried to change the value of color="green", it will not be changed.
+
+//RENAME
+let obj={name:"abi",dob:2004};
+obj.names=obj.name;
+delete obj.name;
+console.log(obj.names);
+
+//setTimeout(()=>console.log("hi"),3000)  // prints the output after the given time.Timelimit will be 3000 milliseconds.
+setInterval(()=>console.log("hi"),3000)   //prints the output in an intreval of 3 milliseconds.
+
+//API fetching by PROMISE
+fetch("https://jsonplaceholder.typicode.com/todos/")
+.then(i=>i.json()).then(i=>console.log(i))
+
+//Promises in JavaScript->to handle asynchronous operations.
+const px=new Promise((resolve,rject)=>{
+    setTimeout(()=>{
+        resolve("resolved")
+    },5000)
+})
+px.then(i=>console.log(i)).catch(()=>console.log("Error"))
+
+const px=new Promise((resolve,rject)=>{
+        resolve("resolved")
+})
+px.then(i=>console.log(i)).catch(()=>console.log("error"))
+
+//API fetching using ASYNC and AWAIT
+let api=async()=>{
+    let pro=await fetch("https://jsonplaceholder.typicode.com/todos/")
+    let data=await pro.json();
+    console.log(data)
+}
+api()
+
